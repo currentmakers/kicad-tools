@@ -137,7 +137,7 @@ done
 
 for LAYER in $LAYERS ; do
   echo "Creating PDF for layer $LAYER"
-  kicad-cli pcb export pdf --output ${PDF_PCB}.$LAYER.pdf --layers $LAYER --black-and-white --include-border-title $NAME.kicad_pcb
+  kicad-cli pcb export pdf --output ${PDF_PCB}.$LAYER.pdf --layers $LAYER --common-layers="Edge.Cuts" --black-and-white --include-border-title $NAME.kicad_pcb
 done
 
 pdfunite $REVISION/*.pdf $PDF_PCBFULL
@@ -147,6 +147,14 @@ echo "Removing temporary PDF files for each layer"
 for LAYER in $LAYERS ; do
   rm ${PDF_PCB}.$LAYER.pdf
 done
+
+if [ -f $REVISION/$NAME-F_Coating.gbr ] ; then
+  kicad-cli pcb export pdf --output ${PDF_PCB}.F.Coating.pdf --layers "Edge.Cuts,F.Cu,F.Coating" --drill-shape-opt 0 --mode-single --theme "JLCPCB Order" $NAME.kicad_pcb
+fi
+
+if [ -f $REVISION/$NAME-B_Coating.gbr ] ; then
+  kicad-cli pcb export pdf --output ${PDF_PCB}.B.Coating.pdf --layers "Edge.Cuts,B.Cu,B.Coating" --drill-shape-opt 0 --mode-single --theme "JLCPCB Order" --mirror $NAME.kicad_pcb
+fi
 
 kicad-cli pcb export pos --output $REVISION/$NAME-$REVISION-pos.csv --format csv --units mm --use-drill-file-origin --exclude-dnp $NAME.kicad_pcb
 sed -i.bak "1 s/.*/Designator,Val,Package,MidX,MidY,Rotation,Layer/" $REVISION/$NAME-$REVISION-pos.csv
