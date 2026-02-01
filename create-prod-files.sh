@@ -45,7 +45,7 @@ sed -i "s/[(]date \".*\"/(date \"$CURRENT_DATE\"/" "$NAME.kicad_sch"
 sed -i "s/[(]date \".*\"/(date \"$CURRENT_DATE\"/" "$NAME.kicad_pcb"
 
 PDF_SCH=$REVISION/$NAME-$REVISION-schematics.pdf
-SVG_SCH=$REVISION/$NAME-$REVISION-schematics.svg
+SVG_SCH=$REVISION
 PDF_PCB=$REVISION/$NAME-$REVISION-pcb
 PDF_PCBFULL=$REVISION/$NAME-$REVISION-pcb-full.pdf
 PDF_PCBCUSTOMER=$REVISION/$NAME-$REVISION-pcb.pdf
