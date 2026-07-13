@@ -176,7 +176,7 @@ kicad-cli sch export pdf --no-background-color --output $PDF_SCH $NAME.kicad_sch
 kicad-cli sch export svg --no-background-color --output $SVG_SCH $NAME.kicad_sch
 
 
-kicad-cli sch export bom --output $BOM --fields='Reference,${QUANTITY},Value,Footprint,LCSC' --labels='Designator,Qty,Value,Footprint,LCSC'  --exclude-dnp --group-by='Value,Footprint,LCSC' --ref-range-delimiter ""  $NAME.kicad_sch
+kicad-cli sch export bom --output $BOM --fields='Reference,${QUANTITY},Value,Footprint,LCSC,MF,MPN' --labels='Designator,Qty,Value,Footprint,LCSC,MF,MPN'  --exclude-dnp --group-by='Value,Footprint,LCSC' --ref-range-delimiter ""  $NAME.kicad_sch
 
 kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=top --rotate="0,0,0" --output=$RENDER1 $NAME.kicad_pcb
 kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=top --rotate="330,0,30" --output=$RENDER2 $NAME.kicad_pcb
