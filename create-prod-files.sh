@@ -53,10 +53,12 @@ BOM=$REVISION/$NAME-$REVISION-bom.csv
 DRC_OUT=$REVISION/$NAME-$REVISION-drc
 ERC_OUT=$REVISION/$NAME-$REVISION-erc
 PROD_SPEC=$REVISION/$NAME-prodspec.csv
-RENDER1=$REVISION/${NAME}_top_render.png
-RENDER2=$REVISION/${NAME}_top_left_render.png
-RENDER3=$REVISION/${NAME}_top_right_render.png
-RENDER4=$REVISION/${NAME}_bot_render.png
+RENDER1=$REVISION/${NAME}-${REVISION}_top_render.png
+RENDER2=$REVISION/${NAME}-${REVISION}_top_left_render.png
+RENDER3=$REVISION/${NAME}-${REVISION}_top_right_render.png
+RENDER4=$REVISION/${NAME}-${REVISION}_bot_render.png
+RENDER5=$REVISION/${NAME}-${REVISION}_bot_left_render.png
+RENDER6=$REVISION/${NAME}-${REVISION}_bot_right_render.png
 
 declare -A finish_map
 finish_map["None"]="HASL"
@@ -182,6 +184,8 @@ kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --qua
 kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=top --rotate="330,0,30" --output=$RENDER2 $NAME.kicad_pcb
 kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=top --rotate="330,0,330" --output=$RENDER3 $NAME.kicad_pcb
 kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=top --rotate="180,0,180" --output=$RENDER4 $NAME.kicad_pcb
+kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=bottom --rotate="330,0,30" --output=$RENDER5 $NAME.kicad_pcb
+kicad-cli pcb render --use-board-stackup-colors --width=1920 --height=1080 --quality=high --light-side="0.5" --perspective --side=bottom --rotate="330,0,330" --output=$RENDER6 $NAME.kicad_pcb
 
 
 echo "See $PROD_SPEC for production settings." >>$REVISION/README.txt
